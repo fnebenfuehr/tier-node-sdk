@@ -12,8 +12,8 @@ const defaultUserAgent = `tier/${version} ${git.substring(0, 8)} ${
     ? navigator.userAgent
     : typeof process !== 'undefined'
     ? `node/${process.version}`
-  /* c8 ignore start */
-    : ''
+    : /* c8 ignore start */
+      ''
   /* c8 ignore stop */
 }`.trim()
 
@@ -536,6 +536,13 @@ export class Tier {
       success_url: successUrl,
       cancel_url: params.cancelUrl,
       require_billing_address: params.requireBillingAddress,
+      update_customer_address: params.updateCustomerAddress,
+      tax: params.tax
+        ? {
+            automatic: params.tax.automatic,
+            collect_id: params.tax.collectId,
+          }
+        : undefined,
     }
     const { features, trialDays } = params
     if (features) {
