@@ -151,15 +151,11 @@ export async function can(
 export async function checkout(
   org: OrgName,
   successUrl: string,
-  { cancelUrl, features, trialDays }: CheckoutParams = {},
+  checkoutParams: CheckoutParams = {},
   clientOptions?: TierGetClientOptions
 ): Promise<CheckoutResponse> {
   const tier = await getClient(clientOptions)
-  return await tier.checkout(org, successUrl, {
-    cancelUrl,
-    features,
-    trialDays,
-  })
+  return await tier.checkout(org, successUrl, checkoutParams)
 }
 
 /**
